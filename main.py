@@ -1,10 +1,23 @@
 
 def count_batteries_by_health(present_capacities):
-  return {
-    "healthy": 0,
-    "exchange": 0,
-    "failed": 0
-  }
+   healthy=[]
+   exchange=[]
+   failed=[]
+   for  i in present_capacities :
+        x=100*(i/120)
+        if(x>=80):
+            healthy.append(i)
+        else:
+            if(x<65):
+                failed.append(i)
+            else:
+                exchange.append(i)
+                
+    return {
+    "healthy": len(healthy),
+    "exchange": len(exchange),
+    "failed": len(failed)
+      }
 
 
 def test_bucketing_by_health():
