@@ -1,23 +1,21 @@
 
 def count_batteries_by_health(present_capacities):
-   healthy=[]
-   exchange=[]
-   failed=[]
-   for  i in present_capacities :
-        x=100*(i/120)
-        if(x>=80):
-            healthy.append(i)
-        else:
-            if(x<65):
-                failed.append(i)
-            else:
-                exchange.append(i)
-                
-    return {
-    "healthy": len(healthy),
-    "exchange": len(exchange),
-    "failed": len(failed)
-      }
+  counts = {
+        "healthy": 0,
+        "exchange": 0,
+        "failed": 0
+    }
+   for  present_capacity in present_capacities :
+      rated_capacity=120 #Ah
+      soh_percentage=100*(present_capacity/rated_capacity)
+      if soh_percentage > 80:
+         counts["healthy"] += 1
+      elif 65 <= soh_percentage <= 80:
+         counts["exchange"] += 1
+      else:
+         counts["failed"] += 1
+   return counts
+
 
 
 def test_bucketing_by_health():
